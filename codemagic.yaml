@@ -1,0 +1,15 @@
+workflows:
+  android-app-build:
+    name: Android App Build
+    instance_type: mac_mini_m1
+    environment:
+      groups:
+        - android-sdk
+      java: 17
+    scripts:
+      - name: Grant execute permission to gradlew
+        script: chmod +x ./gradlew
+      - name: Build release APK
+        script: ./gradlew app:assembleRelease
+    artifacts:
+      - app/build/outputs/apk/release/*.apk
